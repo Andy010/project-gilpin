@@ -17,6 +17,8 @@
     
     //Add user to database
     public function addDatabase($firstName, $lastName, $email, $username, $password, $con) {
+      //Hash password
+      $hash = hashPassword($password);
       
       //Check connection
       if ($con->connect_error) {
@@ -24,7 +26,7 @@
       } else {
         
         //Create SQL statement
-        $sql = 'INSERT INTO users (firstName, lastName, email, username, password) VALUES ( "' .$firstName .'", "' .$lastName .'", "' .$email .'", "' .$username .'", "' .$password .'")';
+        $sql = 'INSERT INTO users (firstName, lastName, email, username, password) VALUES ( "' .$firstName .'", "' .$lastName .'", "' .$email .'", "' .$username .'", "' .$hash .'")';
         
         //Add user into database
         if ($con->query($sql) === TRUE) {
@@ -36,6 +38,17 @@
     }
     
   }
+
+    function hashPassword($password){
+      
+      $password = $password;
+      $cost = 10;
+      $salt = strtr(base64_encode(mcrypt_create_iv(16, MCRYPT_DEV_URANDOM)), '+', '.');
+      $salt = sprintf("$2a$%02d$", $cost) . $salt;
+      $hash = crypt($password, $salt);
+      return $hash;
+        
+    }
 
 
 ?>
