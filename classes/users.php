@@ -1,5 +1,7 @@
 <?php
 
+include '../config.php';
+
   class User {
     public $firstName;
     public $lastName;
@@ -37,18 +39,37 @@
       }
     }
     
+
   }
-
-    function hashPassword($password){
-      
-      $password = $password;
-      $cost = 10;
-      $salt = strtr(base64_encode(mcrypt_create_iv(16, MCRYPT_DEV_URANDOM)), '+', '.');
-      $salt = sprintf("$2a$%02d$", $cost) . $salt;
-      $hash = crypt($password, $salt);
-      return $hash;
+    
+     function fetchInfo($U_Id, $con){
+      //Check connection
+      if ($con->connect_error) {
+        die("Connection failed: " . $con->connect_error);
+      } else {
         
+        //Create SQL statement
+        $sql = 'SELECT * FROM users WHERE U_Id ="' .$U_Id .'" LIMIT 1';
+        
+        //Perform SQL query
+        $result = $con->query($sql);
+        
+         //Insert results into an array
+        if ($result->num_rows > 0) {
+          
+          // output data of each row
+          while($row = $result->fetch_assoc()) {
+            $array = array(
+            'username' => $row['username'],
+            'firstname' => $row['firstName'],
+            'lastname' => $row['lastName'],
+            'id' => $row['U_Id'],
+            );
+          }
+        }
+        
+        return $array;
+      }
     }
-
 
 ?>

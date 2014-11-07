@@ -1,3 +1,14 @@
+<?php
+
+session_start();
+include 'functions/move-page.php';
+
+if($_SESSION['ID'] != 'J8Hhh!0oPi8'){
+  movePage('../index.html?notAuth=true&retURL=add-game.php');
+}
+
+?>
+
 <!doctype html>
 <html class="no-js" lang="">
     <head>
@@ -29,8 +40,7 @@
                 <div class="logo-container">
                   <img src="img/logo.png" alt="sportlocator">
                 </div>
-                <h1> We'll help you find people to play sport with. </h2>
-                <h2> Use the search bar below to start looking for games going on near you </h2>
+                <h1> Add game. </h1>
               </div>
             </div>
           </div>
@@ -47,11 +57,19 @@
             </div>
           </div>
           
-          <form action="functions/login-user.php" method="post">
-            <input type="hidden" name="retURL" value="../dashboard.php">
-            <input type="text" name="username" placeholder="Username">
-            <input type="password" name="password" placeholder="Password">
-            <input type="submit" value="Log In">
+          <form action="functions/create-game.php" method="post">
+            <input type="hidden" name="ownerID" value="<?php echo $_SESSION['U_Id']; ?>">
+            <input type="text" name="sport" placeholder="Start typing a sport">
+            <label> When is it? </label>
+            <input type="date" name="date" placeholder="date">
+            <input type="time" name="time">
+            <input type="text" name="address" placeholder="Location name">
+            <input type="text" name="postcode" placeholder="Type a postcode">
+            <input type="text" name="price" placeholder="Price">
+            <input type="hidden" name="currency" value="gbp">
+            <input type="text" name="description" placeholder="Enter a title line">
+            <input type="text" name="level" placeholder="What level">
+            <input type="submit" value="Create game">
           </form>
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>

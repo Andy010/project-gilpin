@@ -12,7 +12,7 @@ function validateUser($username,$password,$con){
       } else {
         
         //Create SQL statement
-        $sql = 'SELECT password FROM users WHERE username = "' .$username .'" LIMIT 1';
+        $sql = 'SELECT password, U_Id FROM users WHERE username = "' .$username .'" LIMIT 1';
         $result = $con->query($sql); 
       }
   
@@ -21,12 +21,16 @@ function validateUser($username,$password,$con){
     // output data of each row
     while($row = $result->fetch_assoc()) {
         $hash = $row['password'];
+        $id = $row['U_Id'];
     }
   }
   
   //Validate password
   if (password_verify($password, $hash)){
-    $validated = true;
+    $validated = array(
+      'approved' => true,
+      'U_Id' => $id,
+      );
   }
   
   return $validated;
