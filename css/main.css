@@ -288,3 +288,7 @@ textarea {
       padding: 10px 0px 10px 0px;
       background-color: #ebebeb;
     }
+
+    .right-align {
+      text-align: right;
+    }

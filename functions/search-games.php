@@ -1,6 +1,9 @@
 <?php
 
-function gameSearch($address, $sport){
+include '../config.php';
+include 'get-coords.php';
+
+function gameSearch($address, $sport, $con){
   
   //Get coordinates
   $coords = fetchCoordinates($address);
@@ -45,5 +48,8 @@ function gameSearch($address, $sport){
      
   }
 }
+}
 
+  $gameTest = gameSearch('hp16 9rj', 'football', $con);
+  print_r($gameTest);
 ?>

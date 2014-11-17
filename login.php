@@ -25,15 +25,8 @@
         <header>
           <div class="hero-image">
             <div class="container">
-              <div class="eight columns">
-                <span>Project Gilpin</span>
-              </div>
-              <div class="eight columns right-align">
-                <a href="login.php" title="login"> Login </a> | <a href="register.php" title="register"> Register </a>
-              </div>
               <div class="sixteen columns">
-                <h1> We'll help you find people to play sport with. </h2>
-                <h2> Use the search bar below to start looking for games going on near you </h2>
+                <h1> Login. </h1>
               </div>
             </div>
           </div>
@@ -41,14 +34,17 @@
           <div class="search-bar">
             <div class="container">
               <div class="sixteen columns">
-                <form action="search-games.php">
-                  <input type="text" name="postcode" placeholder="Search close to...">
-                  <input type="text" name="sport" placeholder="Start typing a sport">
-                  <input type="submit" value="Search">
+                <form action="functions/login-user.php" method="post">
+                  <input type="hidden" name="retURL" value="../dashboard.php">
+                  <input type="text" name="username" placeholder="Username">
+                  <input type="password" name="password" placeholder="Password">
+                  <input type="submit" value="Log In">
                 </form>
               </div>
             </div>
           </div>
+          
+
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
         <script src="js/plugins.js"></script>

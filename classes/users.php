@@ -1,6 +1,6 @@
 <?php
 
-include '../config.php';
+include 'hash-password.php';
 
   class User {
     public $firstName;

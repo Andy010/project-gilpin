@@ -14,6 +14,29 @@
         <link rel="stylesheet" href="css/main.css">
         <link rel="stylesheet" href="css/skeleton.css"
         <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+  
+        <script>
+function checkUsername(str) {
+ if (str=="") {
+    document.getElementById("username").innerHTML="";
+    return;
+  } 
+  if (window.XMLHttpRequest) {
+    // code for IE7+, Firefox, Chrome, Opera, Safari
+    xmlhttp=new XMLHttpRequest();
+  } else { // code for IE6, IE5
+    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+  xmlhttp.onreadystatechange=function() {
+    if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+      document.getElementById("username-result").innerHTML=xmlhttp.responseText;
+    }
+  }
+  xmlhttp.open("GET","functions/username-check.php?q="+str,true);
+  xmlhttp.send(); 
+
+}
+</script>
     </head>
     <body>
         <!--[if lt IE 8]>
@@ -25,30 +48,29 @@
         <header>
           <div class="hero-image">
             <div class="container">
-              <div class="eight columns">
-                <span>Project Gilpin</span>
-              </div>
-              <div class="eight columns right-align">
-                <a href="login.php" title="login"> Login </a> | <a href="register.php" title="register"> Register </a>
-              </div>
               <div class="sixteen columns">
-                <h1> We'll help you find people to play sport with. </h2>
-                <h2> Use the search bar below to start looking for games going on near you </h2>
+                <h1> Register. </h1>
               </div>
             </div>
           </div>
           
-          <div class="search-bar">
+          
             <div class="container">
               <div class="sixteen columns">
-                <form action="search-games.php">
-                  <input type="text" name="postcode" placeholder="Search close to...">
-                  <input type="text" name="sport" placeholder="Start typing a sport">
-                  <input type="submit" value="Search">
+                <form action="add-user.php" method="post">
+                  <input type="text" name="firstName" placeholder=" First Name"><br>
+                  <input type="text" name="lastName" placeholder=" Last Name"><br>
+                  <input type="text" name="email" placeholder=" Email"><br>
+                  <input type="text" name="username" id="username" placeholder=" Username" onchange="checkUsername(this.value)">
+                  <div class="username-result" id="username-result"></div>
+                  <input type="password" name="password" placeholder=" Password"><br>
+                  <input type="submit" value="Sign Up!">
                 </form>
               </div>
             </div>
-          </div>
+          
+          
+
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
         <script src="js/plugins.js"></script>
